@@ -15,7 +15,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -49,13 +49,16 @@ class OPFManifest(Element):
             nsp={"o": Namespace.OPF, "x": Namespace.XML},
             required=None)
         for item in item_arr:
-            item_parsed = None
             try:
                 item_parsed = OPFItem(obj=item)
+                if (
+                        (self.internal_path != None) and
+                        (item_parsed.v_href != None)):
+                    item_parsed.internal_path = yael.util.norm_join_parent(
+                        self.internal_path, item_parsed.v_href)
+                self.add_item(item_parsed)
             except:
                 pass
-            if item_parsed != None:
-                self.add_item(item_parsed)
 
     def json_object(self, recursive=True):
         obj = {
@@ -98,6 +101,19 @@ class OPFManifest(Element):
         :rtype:              OPFItem
         """
         return list(e for e in self.items if e.v_media_type == v_media_type)
+
+    def item_by_internal_path(self, internal_path):
+        """
+        Return the <item> child with href corresponding
+        to the given internal path.
+
+        :param internal_path: the internal path of the desired item
+        :type  internal_path: str
+        :returns:             the child with given path, or None if not found
+        :rtype:               OPFItem
+        """
+        lis = list(e for e in self.items if e.internal_path == internal_path)
+        return yael.util.safe_first(lis)
 
     @property
     def v_id(self):

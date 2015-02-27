@@ -3,7 +3,7 @@
 **yael** (Yet Another EPUB Library) is a Python library for reading, manipulating, and writing EPUB 2/3 files.
 
 * Version: 0.0.1
-* Date: 2015-02-26
+* Date: 2015-02-27
 * Developer: [Alberto Pettarin](http://www.albertopettarin.it/) ([contact](http://www.albertopettarin.it/contact.html))
 * License: the MIT License (MIT)
 
@@ -16,10 +16,11 @@ The reading part is essentially complete, while the editing/writing is missing.
 
 Please do **NOT** download/use this code in production until it reaches v1.0.0.
 
-Feedback is welcome at any version number!
+Feedback (especially on the API/interface) is welcome at any version number!
 
-See [`test/publication_test.py`](test/publication_test.py) and
-[`test/simpleepub_test.py`](test/simpleepub_test.py) for usage examples.
+See [`test/publication_test.py`](test/publication_test.py),
+[`test/simpleepub_test.py`](test/simpleepub_test.py), and
+[`test/epub_to_gv.py`](test/epub_to_gv.py) for usage examples.
 
 
 ## Documentation
@@ -29,7 +30,8 @@ Online: [http://www.albertopettarin.it/yael/](http://www.albertopettarin.it/yael
 Generated from the source (requires sphinx):
 
 ```
-$ cd docs
+$ git clone https://github.com/pettarin/yael.git
+$ cd yael/docs
 $ make clean
 $ make html
 ```
@@ -45,7 +47,7 @@ $ make html
 Parsing nearly all of EPUB 2 and 3 OCF/OPF specifications, including:
 
 * EPUB 2 `<meta>` and `<guide>` OPF elements
-* EPUB 3 `<meta>` refines
+* EPUB 3 `<meta>` (including `refines`)
 * EPUB 3 Media Overlays (SMIL files)
 * EPUB 3 Navigation Document (including `<nav>` elements other than `toc` and `landmarks`)
 * EPUB 3 Multiple Renditions

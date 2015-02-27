@@ -18,7 +18,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -110,7 +110,9 @@ class OPFPacDocument(PacDocument):
             args=["o", OPFPacDocument.E_MANIFEST],
             nsp={"o": Namespace.OPF, 'x': Namespace.XML},
             required=OPFPacDocument.E_MANIFEST)
-        self.manifest = OPFManifest(obj=manifest_arr[0])
+        self.manifest = OPFManifest(
+            obj=manifest_arr[0],
+            internal_path=self.internal_path)
 
         #locate <metadata> element
         metadata_arr = yael.util.query_xpath(
@@ -119,7 +121,9 @@ class OPFPacDocument(PacDocument):
             args=["o", OPFPacDocument.E_METADATA],
             nsp={"o": Namespace.OPF, "x": Namespace.XML},
             required=OPFPacDocument.E_METADATA)
-        self.metadata = OPFMetadata(obj=metadata_arr[0])
+        self.metadata = OPFMetadata(
+            obj=metadata_arr[0],
+            internal_path=self.internal_path)
 
         # locate <spine> element
         spine_arr = yael.util.query_xpath(
@@ -128,7 +132,9 @@ class OPFPacDocument(PacDocument):
             args=["o", OPFPacDocument.E_SPINE],
             nsp={"o": Namespace.OPF, "x": Namespace.XML},
             required=OPFPacDocument.E_SPINE)
-        self.spine = OPFSpine(obj=spine_arr[0])
+        self.spine = OPFSpine(
+            obj=spine_arr[0],
+            internal_path=self.internal_path)
 
         # locate <guide> element
         guide_arr = yael.util.query_xpath(
@@ -138,7 +144,9 @@ class OPFPacDocument(PacDocument):
             nsp={"o": Namespace.OPF, "x": Namespace.XML},
             required=None)
         if len(guide_arr) > 0:
-            self.guide = OPFGuide(obj=guide_arr[0])
+            self.guide = OPFGuide(
+                obj=guide_arr[0],
+                internal_path=self.internal_path)
 
         # set unique identifier
         u_i_id = package.get(OPFPacDocument.A_UNIQUE_IDENTIFIER)
