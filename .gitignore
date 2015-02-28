@@ -1,4 +1,5 @@
-backup.sh
-*.pyc
+*.sh
+*.py[cdo]
 yael/__pycache__
 docs/build
+dist
