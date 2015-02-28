@@ -14,7 +14,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -42,7 +42,7 @@ class NCXToc(Element):
     E_NCX = "ncx"
     E_TEXT = "text"
 
-    # TODO split <head> into a separate class?
+    # TODO split `<head>` into a separate class?
 
     def __init__(self, internal_path=None, obj=None, string=None):
         self.v_docauthor = None
@@ -82,7 +82,7 @@ class NCXToc(Element):
         return obj
 
     def parse_object(self, obj):
-        # locate <ncx> element
+        # locate `<ncx>` element
         ncx_arr = yael.util.query_xpath(
             obj=obj,
             query="/{0}:{1}",
@@ -95,7 +95,7 @@ class NCXToc(Element):
         self.v_version = ncx.get(NCXToc.A_VERSION)
         self.v_xml_lang = ncx.get(NCXToc.A_NS_LANG)
 
-        # locate <meta> element (if any)
+        # locate `<meta>` element (if any)
         meta_arr = yael.util.query_xpath(
             obj=ncx,
             query="{0}:{1}/{0}:{2}",
@@ -116,7 +116,7 @@ class NCXToc(Element):
             elif name == NCXToc.A_DTB_GENERATOR:
                 self.v_dtb_generator = content
 
-        # locate <docTitle> element (if any)
+        # locate `<docTitle>` element (if any)
         doctitle_arr = yael.util.query_xpath(
             obj=ncx,
             query="{0}:{1}/{0}:{2}",
@@ -126,7 +126,7 @@ class NCXToc(Element):
         if len(doctitle_arr) > 0:
             self.v_doctitle = doctitle_arr[0].text
 
-        # locate <docAuthor> element (if any)
+        # locate `<docAuthor>` element (if any)
         docauthor_arr = yael.util.query_xpath(
             obj=ncx,
             query="{0}:{1}/{0}:{2}",
@@ -136,7 +136,7 @@ class NCXToc(Element):
         if len(docauthor_arr) > 0:
             self.v_docauthor = docauthor_arr[0].text
 
-        # locate <navMap> element (if any)
+        # locate `<navMap>` element (if any)
         navmap_arr = yael.util.query_xpath(
             obj=ncx,
             query="{0}:{1}",
@@ -146,7 +146,7 @@ class NCXToc(Element):
         if len(navmap_arr) > 0:
             navmap = navmap_arr[0]
 
-            # locate children <navPoint> elements (if any)
+            # locate children `<navPoint>` elements (if any)
             navpoint_arr = yael.util.query_xpath(
                 obj=navmap,
                 query="{0}:{1}",
@@ -167,7 +167,7 @@ class NCXToc(Element):
         Add the given child to this NCX TOC.
 
         :param child: the node child to be added
-        :type  child: NCXTocNode
+        :type  child: :class:`yael.ncxtocnode.NCXTocNode`
 
         """
         self.children.append(child)
@@ -308,7 +308,7 @@ class NCXToc(Element):
         """
         The children elements of this NCX TOC.
 
-        :rtype: list of `yael.ncxtocnode.NCXTocNode` objects
+        :rtype: list of :class:`yael.ncxtocnode.NCXTocNode` objects
         """
         return self.__children
 

@@ -19,7 +19,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -78,7 +78,7 @@ class Container(Element):
 
     def parse_object(self, obj):
         try:
-            # locate <container> element
+            # locate `<container>` element
             container_arr = yael.util.query_xpath(
                 obj=obj,
                 query="/{0}:{1}",
@@ -87,7 +87,7 @@ class Container(Element):
                 required=Container.E_CONTAINER)
             container = container_arr[0]
 
-            # locate <rootfile> elements
+            # locate `<rootfile>` elements
             rootfile_arr = yael.util.query_xpath(
                 obj=container,
                 query="{0}:{1}/{0}:{2}",
@@ -97,7 +97,7 @@ class Container(Element):
             for rootfile in rootfile_arr:
                 self._parse_rootfile(rootfile)
 
-            # locate <link> optional element
+            # locate `<link>` optional element
             link_arr = yael.util.query_xpath(
                 obj=container,
                 query="{0}:{1}",
@@ -162,7 +162,7 @@ class Container(Element):
 
     def _parse_rootfile(self, obj):
         """
-        Parse the given <rootfile> node object,
+        Parse the given `<rootfile>` node object,
         and append the parsed Rendition to this Container.
         """
 
@@ -186,7 +186,7 @@ class Container(Element):
 
     def _parse_link(self, obj):
         """
-        Parse the given <link> node object,
+        Parse the given `<link>` node object,
         and append the parsed RMDocument
         to this Container.
         """

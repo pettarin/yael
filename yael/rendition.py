@@ -18,7 +18,7 @@ from yael.jsonable import JSONAble
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -232,7 +232,7 @@ class Rendition(Element):
         The TOC associated with this Rendition.
 
         If the Rendition belongs to an EPUB 3 publication,
-        return the <nav> TOC in the Navigation Document.
+        return the `<nav>` TOC in the Navigation Document.
 
         If the Rendition belongs to an EPUB 2 publication,
         return the NCX TOC.
@@ -253,7 +253,7 @@ class Rendition(Element):
     @property
     def landmarks(self):
         """
-        The landmarks <nav> associated with this Rendition,
+        The landmarks `<nav>` associated with this Rendition,
         or None if not present.
 
         :rtype: :class:`yael.navelement.NavElement`

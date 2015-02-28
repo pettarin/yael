@@ -16,14 +16,13 @@ sys.path.append(PROJECT_DIRECTORY)
 from yael import DC
 from yael import MediaType
 from yael import OPFMeta3
-from yael import Parsing 
-from yael import Publication 
-from yael import SimpleEPUB
+from yael import Parsing
+from yael import Publication
 
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -61,7 +60,7 @@ def main():
 
     # print the JSON string of this publication
     # pretty, 4-chars indented, keys not sorted, entries with empty/null values not removed
-    #print(p)
+    print(p)
 
     # print the JSON string of this publication, compressed
     #print(p.json_string())
@@ -74,7 +73,7 @@ def main():
     #print(p.json_string(pretty=True, indent=2, sort=True, clean=True))
 
     # print toc (default rendition)
-    # nav toc (if EPUB 3) or ncx tco (if EPUB 2)
+    # nav toc (if EPUB 3) or ncx toc (if EPUB 2)
     #print(p.container.default_rendition.toc)
 
     # print ncx toc (default rendition)
@@ -213,6 +212,18 @@ def main():
     #    for i_p_asset in p.encryption.idpf_obfuscated_assets:
     #        print("  + %s" % i_p_asset)
     #    print("")
+
+    # print the number of items in the manifest
+    #print("Manifest length = %d" % len(p.container.default_rendition.pac_document.manifest))
+
+    # print the number of itemrefs in the spine
+    #print("Spine length = %d" % len(p.container.default_rendition.pac_document.spine))
+
+    # print the spine index and linear spine index of the following assets
+    #i_p_assets = ["OEBPS/Text/cover.xhtml", "OEBPS/Text/p001.xhtml", "OEBPS/z.html", "doesnotexist.xhtml"]
+    #for i_p in i_p_assets:
+    #    print("Spine index of        '%s' = %d" % (i_p, p.container.default_rendition.pac_document.spine_index_by_internal_path(i_p)))
+    #    print("Linear spine index of '%s' = %d" % (i_p, p.container.default_rendition.pac_document.spine_linear_index_by_internal_path(i_p)))
 
 
 

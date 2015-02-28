@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-A <li> node inside a <nav> tree.
+A `<li>` node inside a `<nav>` tree.
 """
 
 from yael.element import Element
@@ -13,13 +13,13 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class NavNode(Element):
     """
-    Build a <li> node inside a <nav> tree or
+    Build a `<li>` node inside a `<nav>` tree or
     parse it from `obj` or `string`.
     """
 
@@ -57,7 +57,7 @@ class NavNode(Element):
         return obj
 
     def parse_object(self, obj):
-        # locate <span> element (if any)
+        # locate `<span>` element (if any)
         span_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}",
@@ -69,7 +69,7 @@ class NavNode(Element):
             self.v_label = span_elem.xpath("string()")
             self.v_id = span_elem.get(NavNode.A_ID)
 
-        # locate <a> element (if any)
+        # locate `<a>` element (if any)
         a_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}",
@@ -83,7 +83,7 @@ class NavNode(Element):
             self.v_href = a_elem.get(NavNode.A_HREF)
             self.v_epub_type = a_elem.get(NavNode.A_NS_EPUB_TYPE)
 
-        # locate children <ol><li> elements (if any)
+        # locate children `<ol><li>` elements (if any)
         li_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}/{0}:{2}",
@@ -104,7 +104,7 @@ class NavNode(Element):
         Add the given child to this node.
 
         :param child: the node child to be added
-        :type  child: NavNode
+        :type  child: :class:`yael.navnode.NavNode`
 
         """
         self.children.append(child)

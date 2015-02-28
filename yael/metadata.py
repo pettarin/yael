@@ -14,7 +14,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -52,7 +52,7 @@ class Metadata(Element):
 
     def parse_object(self, obj):
         try:
-            # locate <container> element
+            # locate `<container>` element
             metadata_arr = yael.util.query_xpath(
                 obj=obj,
                 query="/{0}:{1}",
@@ -64,7 +64,7 @@ class Metadata(Element):
             # get unique-identifier id
             u_i_id = metadata.get(Metadata.A_UNIQUE_IDENTIFIER)
 
-            # locate <rootfile> elements
+            # locate `<rootfile>` elements
             identifier_arr = yael.util.query_xpath(
                 obj=metadata,
                 query="{0}:{1}",
@@ -77,7 +77,7 @@ class Metadata(Element):
                     self.v_unique_identifier = yael.util.safe_strip(
                         identifier.text)
 
-            # locate <link> optional element
+            # locate `<link>` optional element
             meta_arr = yael.util.query_xpath(
                 obj=metadata,
                 query="{0}:{1}",

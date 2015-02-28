@@ -23,7 +23,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -275,22 +275,46 @@ class SimpleEPUB(object):
     def resolved_spine(self):
         """
         The spine, as a (ordered) list of internal paths
-        to the assets referenced in the actual OPF <spine>.
+        to the assets referenced in the actual OPF `<spine>`.
 
-        :rtype: list of str 
+        :rtype: list of str
         """
         return self.ebook.container.default_rendition.pac_document.files_referenced_spine
+
+    def spine_index_by_internal_path(self, internal_path):
+        """
+        Return the index in the spine of the file located
+        at the given internal path (relative to the Container root).
+
+        :param internal_path: the internal path of the desired item
+        :type  internal_path: str
+        :returns:             the index in the spine, or -1 if not found
+        :rtype:               int
+        """
+        return self.ebook.container.default_rendition.pac_document.spine_index_by_internal_path(internal_path)
 
     @property
     def resolved_spine_linear(self):
         """
         The spine, as a (ordered) list of internal paths
-        to the assets referenced in the actual OPF <spine>,
+        to the assets referenced in the actual OPF `<spine>`,
         with attribute linear="yes" or omitted.
 
         :rtype: list of str
         """
         return self.ebook.container.default_rendition.pac_document.files_referenced_spine_linear
+
+    def spine_linear_index_by_internal_path(self, internal_path):
+        """
+        Return the index in the linear spine of the file located
+        at the given internal path (relative to the Container root).
+
+        :param internal_path: the internal path of the desired item
+        :type  internal_path: str
+        :returns:             the index in the spine, or -1 if not found
+        :rtype:               int
+        """
+        return self.ebook.container.default_rendition.pac_document.spine_linear_index_by_internal_path(internal_path)
 
     def _resolve_reference(self, internal_path, node):
         if (isinstance(node, NavNode)) and (node.v_href != None):
@@ -306,15 +330,15 @@ class SimpleEPUB(object):
 
     def get_dc_metadatum(self, tag, only_first=True, as_string=True):
         """
-        Get the value(s) of <dc:...> metadatum/metadata.
+        Get the value(s) of `<dc:...>` metadatum/metadata.
 
         :param tag:        the name of the desired metadatum
                            Use a :class:`yael.dc.DC` `E_NS_` value.
         :type  tag:        str
         :param only_first: only return the first metadatum
-        :type  only_first: boolean
+        :type  only_first: bool
         :param as_string:  return only the value of the metadatum, as a string
-        :type  as_string:  boolean
+        :type  as_string:  bool
         :rtype:            (list of) str or :class:`yael.opfdc.OPFDC`
         """
         metadata = self.ebook.container.default_rendition.pac_document.metadata

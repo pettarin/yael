@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-An OPF <item> element, that is, a child of the <manifest>.
+An OPF `<item>` element, that is, a child of the `<manifest>`.
 """
 
 from yael.element import Element
@@ -11,13 +11,13 @@ from yael.jsonable import JSONAble
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class OPFItem(Element):
     """
-    Build an OPF <item> element or
+    Build an OPF `<item>` element or
     parse it from `obj` or `string`.
     """
 
@@ -77,7 +77,7 @@ class OPFItem(Element):
         store a reference to the refinement metadatum.
 
         :param refinement: the refinement metadatum
-        :type  refinement: OPFMetadatum
+        :type  refinement: :class:`yael.opfmetadatum.OPFMetadatum`
 
         """
         self.refinements.append(refinement)
@@ -89,7 +89,7 @@ class OPFItem(Element):
         :param v_property: a property name
         :type  v_property: str
         :returns:          True if the item has the property
-        :rtype:            boolean
+        :rtype:            bool
 
         """
 

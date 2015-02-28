@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-An OPF <link> element, that is, a child of the <metadata>.
+An OPF `<link>` element, that is, a child of the `<metadata>`.
 """
 
 from yael.element import Element
@@ -10,13 +10,13 @@ from yael.element import Element
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class OPFLink(Element):
     """
-    Build an OPF <link> element or
+    Build an OPF `<link>` element or
     parse it from `obj` or `string`.
     """
 

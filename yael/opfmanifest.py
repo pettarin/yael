@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-The OPF <manifest> element.
+The OPF `<manifest>` element.
 """
 
 from yael.element import Element
@@ -21,7 +21,7 @@ __status__ = "Development"
 
 class OPFManifest(Element):
     """
-    Build the OPF <manifest> element or
+    Build the OPF `<manifest>` element or
     parse it from `obj` or `string`.
     """
 
@@ -41,7 +41,7 @@ class OPFManifest(Element):
         # get attributes
         self.v_id = obj.get(OPFManifest.A_ID)
 
-        # locate <item> elements
+        # locate `<item>` elements
         item_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}",
@@ -69,48 +69,51 @@ class OPFManifest(Element):
             obj["items"] = JSONAble.safe(self.items)
         return obj
 
+    def __len__(self):
+        return len(self.items)
+
     def add_item(self, item):
         """
-        Add the given <item> to the manifest.
+        Add the given `<item>` to the manifest.
 
-        :param item: the <item> to be added
-        :type  item: OPFItem
+        :param item: the `<item>` to be added
+        :type  item: :class:`yael.opfitem.OPFItem`
         """
         self.items.append(item)
 
     def item_by_id(self, v_id):
         """
-        Return the <item> child with given `id`.
+        Return the `<item>` child with given `id`.
 
         :param v_id: the desired `id`
         :type  v_id: str
         :returns:    the child with given id, or None if not found
-        :rtype:      OPFItem
+        :rtype:      :class:`yael.opfitem.OPFItem`
         """
         lis = list(e for e in self.items if e.v_id == v_id)
         return yael.util.safe_first(lis)
 
     def items_by_media_type(self, v_media_type):
         """
-        Return the <item> child with given `media-type`.
+        Return the `<item>` child with given `media-type`.
 
         :param v_media_type: the desired `media-type`
         :type  v_media_type: str
         :returns:            the child with given media-type,
                              or None if not found
-        :rtype:              OPFItem
+        :rtype:              :class:`yael.opfitem.OPFItem`
         """
         return list(e for e in self.items if e.v_media_type == v_media_type)
 
     def item_by_internal_path(self, internal_path):
         """
-        Return the <item> child with href corresponding
+        Return the `<item>` child with href corresponding
         to the given internal path.
 
         :param internal_path: the internal path of the desired item
         :type  internal_path: str
         :returns:             the child with given path, or None if not found
-        :rtype:               OPFItem
+        :rtype:               :class:`yael.opfitem.OPFItem`
         """
         lis = list(e for e in self.items if e.internal_path == internal_path)
         return yael.util.safe_first(lis)
@@ -131,7 +134,7 @@ class OPFManifest(Element):
     @property
     def items(self):
         """
-        The list of <item> objects in this manifest.
+        The list of `<item>` objects in this manifest.
 
         :rtype: list of :class:`yael.opfitem.OPFItem` objects
         """

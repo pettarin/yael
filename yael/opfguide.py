@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-An OPF <guide> element.
+An OPF `<guide>` element.
 """
 
 from yael.element import Element
@@ -14,13 +14,13 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class OPFGuide(Element):
     """
-    Build an OPF <guide> element or
+    Build an OPF `<guide>` element or
     parse it from `obj` or `string`.
     """
 
@@ -40,7 +40,7 @@ class OPFGuide(Element):
         # get attributes
         self.v_id = obj.get(OPFGuide.A_ID)
 
-        # locate <reference> elements
+        # locate `<reference>` elements
         reference_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}",
@@ -65,35 +65,38 @@ class OPFGuide(Element):
             obj["references"] = JSONAble.safe(self.references)
         return obj
 
+    def __len__(self):
+        return len(self.references)
+
     def add_reference(self, reference):
         """
-        Add the given <reference> (OPFReference) to the guide.
+        Add the given `<reference>` (OPFReference) to the guide.
 
-        :param reference: the <reference> (OPFReference) to be added
-        :type  reference: OPFReference
+        :param reference: the `<reference>` (OPFReference) to be added
+        :type  reference: :class:`yael.opfreference.OPFReference`
         """
         self.references.append(reference)
 
     def reference_by_type(self, v_type):
         """
-        Return the <reference> child with given `type`.
+        Return the `<reference>` child with given `type`.
 
         :param v_type: the desired `type`
         :type  v_type: str
         :returns:      the child with given type, or None if not found
-        :rtype:        OPFReference
+        :rtype:        :class:`yael.opfreference.OPFReference`
         """
         lis = list(e for e in self.references if e.v_type == v_type)
         return yael.util.safe_first(lis)
 
     def reference_by_id(self, v_id):
         """
-        Return the <reference> child with given `id`.
+        Return the `<reference>` child with given `id`.
 
         :param v_id: the desired `id`
         :type  v_id: str
         :returns:    the child with given id, or None if not found
-        :rtype:      OPFReference
+        :rtype:      :class:`yael.opfreference.OPFReference`
         """
         lis = list(e for e in self.references if e.v_id == v_id)
         return yael.util.safe_first(lis)

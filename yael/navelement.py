@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-A <nav> element in the Navigation Document.
+A `<nav>` element in the Navigation Document.
 """
 
 from yael.element import Element
@@ -14,13 +14,13 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class NavElement(Element):
     """
-    Build a <nav> element in the Navigation Document
+    Build a `<nav>` element in the Navigation Document
     or parse it from `obj` or `string`.
     """
 
@@ -59,7 +59,7 @@ class NavElement(Element):
         self.v_id = obj.get(NavElement.A_ID)
 
         # parse title (if any)
-        # it can be any <h1> ... <h6> element
+        # it can be any `<h1>` ... `<h6>` element
         for h_elem in NavElement.E_HX:
             h_arr = yael.util.query_xpath(
                 obj=obj,
@@ -71,7 +71,7 @@ class NavElement(Element):
                 self.title = h_arr[0].xpath("string()")
                 break
 
-        # locate children <ol><li> elements (if any)
+        # locate children `<ol><li>` elements (if any)
         li_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}/{0}:{2}",
@@ -89,10 +89,10 @@ class NavElement(Element):
 
     def add_child(self, child):
         """
-        Add the given child to this <nav>.
+        Add the given child to this `<nav>`.
 
         :param child: the node child to be added
-        :type  child: NavNode
+        :type  child: :class:`yael.navnode.NavNode`
 
         """
         self.children.append(child)
@@ -126,7 +126,7 @@ class NavElement(Element):
     @property
     def title(self):
         """
-        The title of this <nav>.
+        The title of this `<nav>`.
 
         :rtype: str
         """
@@ -139,7 +139,7 @@ class NavElement(Element):
     @property
     def children(self):
         """
-        The children elements of this <nav>.
+        The children elements of this `<nav>`.
 
         :rtype: list of :class:`yael.navnode.NavNode` objects
         """

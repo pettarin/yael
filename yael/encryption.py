@@ -16,7 +16,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -51,7 +51,7 @@ class Encryption(Element):
 
     def parse_object(self, obj):
         try:
-            # locate <encryption> element
+            # locate `<encryption>` element
             encryption_arr = yael.util.query_xpath(
                 obj=obj,
                 query="/{0}:{1}",
@@ -60,7 +60,7 @@ class Encryption(Element):
                 required=Encryption.E_ENCRYPTION)
             encryption = encryption_arr[0]
 
-            # locate <enc:EncryptedKey> elements
+            # locate `<enc:EncryptedKey>` elements
             enc_key_arr = yael.util.query_xpath(
                 obj=encryption,
                 query="{0}:{1}",
@@ -75,7 +75,7 @@ class Encryption(Element):
                 except:
                     pass
 
-            # locate <enc:EncryptedData> elements
+            # locate `<enc:EncryptedData>` elements
             enc_data_arr = yael.util.query_xpath(
                 obj=encryption,
                 query="{0}:{1}",
@@ -86,17 +86,35 @@ class Encryption(Element):
                 enc_data_parsed = None
                 try:
                     enc_data_parsed = EncData(obj=enc_data)
-                    self.encrypted_datas.append(enc_data_parsed)
+                    self.add_enc_data(enc_data_parsed)
                 except:
                     pass
 
         except:
             raise Exception("Error while parsing the given object")
 
+    def add_enc_data(self, enc_data):
+        """
+        Add the given `<enc:EncryptedData>`.
+
+        :param item: the `<enc:EncryptedData>` to be added
+        :type  item: :class:`yael.encdata.EncData`
+        """
+        self.encrypted_datas.append(enc_data)
+
+    def add_enc_key(self, enc_key):
+        """
+        Add the given `<enc:EncryptedKey>`.
+
+        :param item: the `<enc:EncryptedKey>` to be added
+        :type  item: :class:`yael.enckey.EncKey`
+        """
+        self.encrypted_keys.append(enc_key)
+
     @property
     def encrypted_datas(self):
         """
-        The <enc:EncryptedData> children.
+        The `<enc:EncryptedData>` children.
 
         :rtype: list of :class:`yael.encdata.EncData`
         """
@@ -109,7 +127,7 @@ class Encryption(Element):
     @property
     def encrypted_keys(self):
         """
-        The <enc:EncryptedKey> children.
+        The `<enc:EncryptedKey>` children.
 
         :rtype: list of :class:`yael.enckey.EncKey`
         """
@@ -144,4 +162,6 @@ class Encryption(Element):
             (e.v_encryption_method_algorithm == (
                 EncData.V_ENCRYPTIONMETHOD_IDPF)) and
             (e.v_cipher_reference_uri != None)))
+
+
 

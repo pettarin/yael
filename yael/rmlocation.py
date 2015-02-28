@@ -14,7 +14,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -45,7 +45,7 @@ class RMLocation(Element):
 
     def parse_object(self, obj):
         try:
-            # locate <li><a> elements
+            # locate `<li><a>` elements
             a_arr = yael.util.query_xpath(
                 obj=obj,
                 query="{0}:{1}/{0}:{2}",
@@ -70,7 +70,7 @@ class RMLocation(Element):
         Add the given Rendition Mapping Point to this Location.
 
         :param point: the location point to be added
-        :type  point: RMPoint
+        :type  point: :class:`yael.rmpoint.RMPoint`
 
         """
         self.points.append(point)

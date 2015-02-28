@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-An OPF <reference> element, that is, a child of the <guide>.
+An OPF `<reference>` element, that is, a child of the `<guide>`.
 """
 
 from yael.element import Element
@@ -10,13 +10,13 @@ from yael.element import Element
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class OPFReference(Element):
     """
-    Build an OPF <reference> element or
+    Build an OPF `<reference>` element or
     parse it from `obj` or `string`.
     """
 

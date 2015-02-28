@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-An OPF <meta> EPUB 2 metadatum, child of the <metadata>.
+An OPF `<meta>` EPUB 2 metadatum, child of the `<metadata>`.
 """
 
 from yael.jsonable import JSONAble
@@ -12,13 +12,13 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class OPFMeta2(OPFMetadatum):
     """
-    Build an OPF <meta> EPUB 2 metadatum or
+    Build an OPF `<meta>` EPUB 2 metadatum or
     parse it from `obj` or `string`.
     """
 

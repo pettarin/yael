@@ -4,7 +4,7 @@
 """
 A representation of the Navigation Document.
 
-Basically, it is a collection of <nav> (NavElement) objects.
+Basically, it is a collection of `<nav>` (NavElement) objects.
 """
 
 from yael.element import Element
@@ -16,7 +16,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -72,17 +72,17 @@ class NavDocument(Element):
 
     def add_nav(self, nav):
         """
-        Add the given <nav> to this Navigation Document.
+        Add the given `<nav>` to this Navigation Document.
 
-        :param nav: the <nav> to be added
-        :type  nav: NavElement
+        :param nav: the `<nav>` to be added
+        :type  nav: :class:`yael.navelement.NavElement`
         """
         self.navs.append(nav)
 
     @property
     def navs(self):
         """
-        The list of <nav> objects in this Navigation Document.
+        The list of `<nav>` objects in this Navigation Document.
 
         :rtype: list of :class:`yael.navelement.NavElement` objects
         """
@@ -94,25 +94,25 @@ class NavDocument(Element):
 
     def nav_by_id(self, v_id):
         """
-        Return the <nav> child with given `id`.
+        Return the `<nav>` child with given `id`.
 
         :param v_id: the desired `id`
         :type  v_id: str
         :returns:    the child with given id, or None if not found
-        :rtype:      NavElement
+        :rtype:      :class:`yael.navelement.NavElement`
         """
         lis = list(e for e in self.navs if e.v_id == v_id)
         return yael.util.safe_first(lis)
 
     def nav_by_epub_type(self, v_epub_type):
         """
-        Return the <nav> child with given `epub:type`.
+        Return the `<nav>` child with given `epub:type`.
 
         :param v_epub_type: the desired `epub:type`
         :type  v_epub_type: str
         :returns:           the child with given epub:type,
                             or None if not found
-        :rtype:             NavElement
+        :rtype:             :class:`yael.navelement.NavElement`
         """
         lis = list(e for e in self.navs if e.v_epub_type == v_epub_type)
         return yael.util.safe_first(lis)
@@ -120,7 +120,7 @@ class NavDocument(Element):
     @property
     def landmarks(self):
         """
-        The landmarks <nav> element (None if not found).
+        The landmarks `<nav>` element (None if not found).
 
         :rtype: :class:`yael.navelement.NavElement`
         """
@@ -129,7 +129,7 @@ class NavDocument(Element):
     @property
     def page_list(self):
         """
-        The page-list <nav> element (None if not found).
+        The page-list `<nav>` element (None if not found).
 
         :rtype: :class:`yael.navelement.NavElement`
         """
@@ -138,7 +138,7 @@ class NavDocument(Element):
     @property
     def toc(self):
         """
-        The toc <nav> element (None if not found).
+        The toc `<nav>` element (None if not found).
 
         :rtype: :class:`yael.navelement.NavElement`
         """

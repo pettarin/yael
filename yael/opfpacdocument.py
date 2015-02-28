@@ -103,7 +103,7 @@ class OPFPacDocument(PacDocument):
         self.v_prefix = package.get(OPFPacDocument.A_PREFIX)
         self.v_version = package.get(OPFPacDocument.A_VERSION)
 
-        # locate <manifest> element
+        # locate `<manifest>` element
         manifest_arr = yael.util.query_xpath(
             obj=package,
             query="{0}:{1}",
@@ -114,7 +114,7 @@ class OPFPacDocument(PacDocument):
             obj=manifest_arr[0],
             internal_path=self.internal_path)
 
-        #locate <metadata> element
+        #locate `<metadata>` element
         metadata_arr = yael.util.query_xpath(
             obj=package,
             query="{0}:{1}",
@@ -125,7 +125,7 @@ class OPFPacDocument(PacDocument):
             obj=metadata_arr[0],
             internal_path=self.internal_path)
 
-        # locate <spine> element
+        # locate `<spine>` element
         spine_arr = yael.util.query_xpath(
             obj=package,
             query="{0}:{1}",
@@ -136,7 +136,7 @@ class OPFPacDocument(PacDocument):
             obj=spine_arr[0],
             internal_path=self.internal_path)
 
-        # locate <guide> element
+        # locate `<guide>` element
         guide_arr = yael.util.query_xpath(
             obj=package,
             query="{0}:{1}",
@@ -292,7 +292,7 @@ class OPFPacDocument(PacDocument):
     def files_referenced_manifest(self):
         """
         The (ordered) list of files
-        referenced in the OPF <manifest>.
+        referenced in the OPF `<manifest>`.
 
         Each file is represented by its path,
         relative to the Container root.
@@ -312,7 +312,6 @@ class OPFPacDocument(PacDocument):
         except:
             pass
         return []
-
 
     #def filtered_files_referenced_manifest(self, filter_function):
     #    """
@@ -343,7 +342,7 @@ class OPFPacDocument(PacDocument):
     def files_referenced_spine(self):
         """
         The (ordered) list of files
-        referenced in the OPF <spine>.
+        referenced in the OPF `<spine>`.
 
         Each file is represented by its path,
         relative to the Container root.
@@ -390,6 +389,52 @@ class OPFPacDocument(PacDocument):
         except:
             pass
         return []
+
+    def item_by_internal_path(self, internal_path):
+        """
+        Return the `<item>` child with href corresponding
+        to the given internal path.
+
+        :param internal_path: the internal path of the desired item
+        :type  internal_path: str
+        :returns:             the child with given path, or None if not found
+        :rtype:               :class:`yael.opfitem.OPFItem`
+        """
+        if self.manifest != None:
+            return self.manifest.item_by_internal_path(internal_path)
+        return None
+
+    def spine_index_by_internal_path(self, internal_path):
+        """
+        Return the index in the spine of the file located
+        at the given internal path (relative to the Container root).
+
+        :param internal_path: the internal path of the desired item
+        :type  internal_path: str
+        :returns:             the index in the spine, or -1 if not found
+        :rtype:               int
+        """
+
+        item = self.item_by_internal_path(internal_path)
+        if item != None:
+            return self.spine.index_by_idref(item.v_id)
+        return -1
+
+    def spine_linear_index_by_internal_path(self, internal_path):
+        """
+        Return the index in the linear spine of the file located
+        at the given internal path (relative to the Container root).
+
+        :param internal_path: the internal path of the desired item
+        :type  internal_path: str
+        :returns:             the index in the spine, or -1 if not found
+        :rtype:               int
+        """
+
+        item = self.item_by_internal_path(internal_path)
+        if item != None:
+            return self.spine.linear_index_by_idref(item.v_id)
+        return -1
 
     @property
     def v_dir(self):

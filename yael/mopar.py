@@ -2,13 +2,13 @@
 # coding=utf-8
 
 """
-A Media Overlay <par> element.
+A Media Overlay `<par>` element.
 
 Besides its own attributes, it should have
-either a <text> (:class:`yael.motext.MOText`) child,
+either a `<text>` (:class:`yael.motext.MOText`) child,
 or
-both a <text> (:class:`yael.motext.MOText`)
-and an <audio> (:class:`yael.moaudio.MOAudio`) children.
+both a `<text>` (:class:`yael.motext.MOText`)
+and an `<audio>` (:class:`yael.moaudio.MOAudio`) children.
 """
 
 from yael.element import Element
@@ -20,13 +20,13 @@ from yael.namespace import Namespace
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class MOPar(Element):
     """
-    Build a Media Overlay <par> element or
+    Build a Media Overlay `<par>` element or
     parse it from `obj` or `string`.
     """
 
@@ -71,9 +71,9 @@ class MOPar(Element):
 
     def add_child(self, child):
         """
-        Add the given child to this <par>.
+        Add the given child to this `<par>`.
 
-        :param child: the <text> or <audio> child to be added
+        :param child: the `<text>` or `<audio>` child to be added
         :type  child: :class:`yael.moaudio.MOAudio` or
                       :class:`yael.motext.MOText`
 
@@ -109,12 +109,14 @@ class MOPar(Element):
     @property
     def children(self):
         """
-        The children elements of this <par>.
+        The children elements of this `<par>`.
 
         Note: this is implemented as a list
-        (instead of two instance variables, one for <audio> and one for <text>)
+        (instead of two instance variables,
+        one for `<audio>` and one for `<text>`)
         to accommodate a bright future when the spec will allow
-        multiple children elements, e.g. several <text> for each <audio>.
+        multiple children elements,
+        e.g. several `<text>` for each `<audio>`.
 
         :rtype: list of :class:`yael.moaudio.MOAudio` and
                 :class:`yael.motext.MOText`
@@ -128,9 +130,9 @@ class MOPar(Element):
     @property
     def has_audio_child(self):
         """
-        True if this <par> has an <audio> child.
+        True if this `<par>` has an `<audio>` child.
 
-        :rtype: boolean
+        :rtype: bool
         """
         lis = list(e for e in self.children if isinstance(e, MOAudio))
         return len(lis) > 0

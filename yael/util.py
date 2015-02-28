@@ -14,7 +14,7 @@ from yael.obfuscation import Obfuscation
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -119,7 +119,7 @@ def safe_first(lis):
     dealing safely with None or empty arguments.
 
     :param lis: a list of objects or values
-    :type  lis: list
+    :type  lis: list of object
     :returns:   the first element of the list (or None if lis is None or empty)
     :rtype:     object or value
 
@@ -128,6 +128,24 @@ def safe_first(lis):
     if (lis == None) or (len(lis) < 1):
         return None
     return lis[0]
+
+
+def safe_len(lis):
+    """
+    Return the number of elements of the list,
+    dealing safely with non-list arguments.
+
+    :param lis: a list of objects or values
+    :type  lis: list of object
+    :returns:   the length of the list (or -1 if lis is not a list)
+    :rtype:     int
+    """
+
+    try:
+        return len(lis)
+    except:
+        pass
+    return -1
 
 
 def query_xpath(obj, query, args, nsp, required=None, formatted_query=None):
@@ -150,7 +168,7 @@ def query_xpath(obj, query, args, nsp, required=None, formatted_query=None):
     :param query:           a string template to be formatted with args
     :type  query:           str
     :param args:            a list of arguments to format the query
-    :type  args:            list
+    :type  args:            list of str
     :param nsp:             namespace dictionary,
                             mapping prefixes to namespace strings
     :type  nsp:             dict
@@ -159,7 +177,7 @@ def query_xpath(obj, query, args, nsp, required=None, formatted_query=None):
     :param formatted_query: a pre-formatted query
     :type  formatted_query: str
     :returns:               the matched XML node objects
-    :rtype:                 list
+    :rtype:                 list of object
 
     """
 
@@ -236,9 +254,9 @@ def is_valid(obj, allowed_class, single=True):
     :param allowed_class: the allowed class
     :type  allowed_class: class
     :param single:        if True, obj must be a single object
-    :type  single:        boolean
+    :type  single:        bool
     :returns:             whether the given object is valid
-    :rtype:               boolean
+    :rtype:               bool
 
     """
 
@@ -327,6 +345,49 @@ def obfuscate_data(data, key, algorithm):
         accumulator.append(byte_data[i])
         i += 1
     return bytes(accumulator)
+
+
+def clip_time_seconds(string):
+    """
+    Convert the given clip time string in seconds
+    (possibly with decimal digits).
+
+    :param string: the clip time string to be converted
+    :type  string: str
+    :returns:      the clip time in seconds
+    :rtype:        float
+    """
+    if (string == None) or (len(string) < 1):
+        return 0
+    value = 0
+    if "ms" in string:
+        value = float(string.replace("ms", "")) * 0.001
+    elif "s" in string:
+        value = float(string.replace("s", ""))
+    elif "h" in string:
+        value = float(string.replace("h", "")) * 3600
+    elif "min" in string:
+        value = float(string.replace("min", "")) * 60
+    else:
+        v_h = 0
+        v_m = 0
+        v_s = 0
+        v_d = 0
+        str_hms = string
+        if "." in str_hms:
+            str_hms, str_d = str_hms.split(".")
+            if len(str_d) > 0:
+                v_d = 1.0 * int(str_d) / (10 ** len(str_d))
+        arr_hms = str_hms.split(":")
+        v_n = len(arr_hms)
+        if v_n >= 1:
+            v_s = int(arr_hms[-1])
+        if v_n >= 2:
+            v_m = int(arr_hms[-2])
+        if v_n >= 3:
+            v_h = int(arr_hms[-3])
+        value = v_h * 3600 + v_m * 60 + v_s + v_d
+    return value
 
 
 

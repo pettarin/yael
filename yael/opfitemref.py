@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-An OPF <itemref> element, that is, a child of the <spine>.
+An OPF `<itemref>` element, that is, a child of the `<spine>`.
 """
 
 from yael.element import Element
@@ -10,13 +10,13 @@ from yael.element import Element
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class OPFItemref(Element):
     """
-    Build an OPF <itemref> element or
+    Build an OPF `<itemref>` element or
     parse it from `obj` or `string`.
     """
 
@@ -77,7 +77,7 @@ class OPFItemref(Element):
         :param v_property: a property name
         :type  v_property: str
         :returns:          True if the itemref has the property
-        :rtype:            boolean
+        :rtype:            bool
 
         """
         if self.v_properties != None:

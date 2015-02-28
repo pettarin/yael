@@ -18,7 +18,7 @@ import json
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -32,9 +32,9 @@ class JSONAble(object):
         To be implemented in concrete subclasses.
 
         :param recursive: if True, append JSON sub-objects
-        :type  recursive: boolean
+        :type  recursive: bool
         :returns:         object that can be output as a JSON string
-        :rtype:           dictionary
+        :rtype:           dict
 
         """
 
@@ -54,16 +54,16 @@ class JSONAble(object):
         Format a JSON string representation of the object.
 
         :param recursive: if True, append JSON sub-objects
-        :type  recursive: boolean
+        :type  recursive: bool
         :param pretty:    if True, pretty print the string
-        :type  pretty:    boolean
+        :type  pretty:    bool
         :param indent:    the number of spaces for each indentation level
         :type  indent:    integer
         :param sort:      if True, sort the keys
-        :type  sort:      boolean
+        :type  sort:      bool
         :param clean:     if True, remove None values and empty
                           lists/dictionaries
-        :type  clean:     boolean
+        :type  clean:     bool
         :returns:         a JSON representation of the object
         :rtype:           str
 
@@ -98,7 +98,7 @@ class JSONAble(object):
         The result might be None, if `obj` is invalid.
 
         :param obj: the object to represent
-        :type  obj: JSONAble object or a list of JSONAble objects
+        :type  obj: (list of) :class:`yael.jsonable.JSONAble`
         :returs:    a JSON-safe representation of the object
         :rtype:     object
 
@@ -133,7 +133,7 @@ class JSONAble(object):
         want to avoid side effects.
 
         :param obj: the object to clean
-        :type  obj: value, array or dictionary
+        :type  obj: value, list or dict
         :returns:   a cleaned version (possibly, None) of the given object
         :rtype:     object
 

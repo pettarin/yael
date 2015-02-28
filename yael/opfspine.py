@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-The OPF <spine> element.
+The OPF `<spine>` element.
 """
 
 from yael.element import Element
@@ -14,13 +14,13 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class OPFSpine(Element):
     """
-    Build the OPF <spine> element or
+    Build the OPF `<spine>` element or
     parse it from `obj` or `string`.
     """
 
@@ -47,7 +47,7 @@ class OPFSpine(Element):
         self.v_ppd = obj.get(OPFSpine.A_PAGE_PROGRESSION_DIRECTION)
         self.v_toc = obj.get(OPFSpine.A_TOC)
 
-        # locate <itemref> elements
+        # locate `<itemref>` elements
         itemref_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}",
@@ -74,26 +74,75 @@ class OPFSpine(Element):
             obj["itemrefs"] = JSONAble.safe(self.itemrefs)
         return obj
 
+    def __len__(self):
+        return len(self.itemrefs)
+
     def add_itemref(self, itemref):
         """
-        Add the given <itemref> to the spine.
+        Add the given `<itemref>` to the spine.
 
-        :param item: the <itemref> to be added
-        :type  item: OPFItemref
+        :param item: the `<itemref>` to be added
+        :type  item: :class:`yael.opfitemref.OPFItemref`
         """
         self.itemrefs.append(itemref)
 
     def itemref_by_id(self, v_id):
         """
-        Return the <itemref> child with given `id`.
+        Return the `<itemref>` child with given `id`.
 
         :param v_id: the desired `id`
         :type  v_id: str
         :returns:    the child with given id, or None if not found
-        :rtype:      OPFItemref
+        :rtype:      :class:`yael.opfitemref.OPFItemref`
         """
         lis = list(e for e in self.itemrefs if e.v_id == v_id)
         return yael.util.safe_first(lis)
+
+    def itemref_by_idref(self, v_idref):
+        """
+        Return the `<itemref>` child with given `idref`.
+
+        :param v_idref: the desired `idref`
+        :type  v_idref: str
+        :returns:       the child with given id, or None if not found
+        :rtype:         :class:`yael.opfitemref.OPFItemref`
+        """
+        lis = list(e for e in self.itemrefs if e.v_idref == v_idref)
+        return yael.util.safe_first(lis)
+
+    def index_by_idref(self, v_idref):
+        """
+        Return the index in the spine of the
+        `<itemref>` child with given `idref`.
+
+        :param v_idref: the desired `idref`
+        :type  v_idref: str
+        :returns:       the index, or -1 if not found
+        :rtype:         int
+        """
+        index = 0
+        for itemref in self.itemrefs:
+            if itemref.v_idref == v_idref:
+                return index
+            index += 1
+        return -1
+
+    def linear_index_by_idref(self, v_idref):
+        """
+        Return the index in the linear spine of the
+        `<itemref>` child with given `idref`.
+
+        :param v_idref: the desired `idref`
+        :type  v_idref: str
+        :returns:       the index, or -1 if not found
+        :rtype:         int
+        """
+        index = 0
+        for itemref in self.linear_itemrefs:
+            if itemref.v_idref == v_idref:
+                return index
+            index += 1
+        return -1
 
     @property
     def v_id(self):
@@ -137,9 +186,9 @@ class OPFSpine(Element):
     @property
     def itemrefs(self):
         """
-        The list of <itemref> objects in this spine.
+        The list of `<itemref>` objects in this spine.
 
-        :rtype: list of `yael.opfitemref.OPFItemref` objects
+        :rtype: list of :class:`yael.opfitemref.OPFItemref` objects
         """
         return self.__itemrefs
 
@@ -150,10 +199,10 @@ class OPFSpine(Element):
     @property
     def linear_itemrefs(self):
         """
-        The list of <itemref> objects in this spine,
+        The list of `<itemref>` objects in this spine,
         with `linear="yes"` (or omitted) attribute.
 
-        :rtype: list of `yael.opfitemref.OPFItemref` objects
+        :rtype: list of :class:`yael.opfitemref.OPFItemref` objects
         """
         return list(e for e in self.itemrefs if e.v_linear != OPFSpine.V_NO)
 

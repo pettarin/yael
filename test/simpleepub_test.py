@@ -19,7 +19,7 @@ from yael import SimpleEPUB
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -81,6 +81,17 @@ def main():
     #    print(i_p_spine_item)
     #print("")
 
+    # print the spine index of the following assets
+    #i_p_assets = [
+    #    "OEBPS/Text/cover.xhtml",
+    #    "OEBPS/Text/p001.xhtml",
+    #    "OEBPS/z.html",
+    #    "doesnotexist.xhtml"]
+    #for i_p in i_p_assets:
+    #    print("Spine index of '%s' = %d" % (
+    #        i_p,
+    #        p.spine_index_by_internal_path(i_p)))
+
     # print the spine (linear="yes" or omitted)
     #print("Spine (linear)")
     #for i_p_spine_item in p.resolved_spine_linear:
@@ -106,6 +117,8 @@ def main():
     #    output_file.write(cover_image)
     #    output_file.close()
     #    print("Cover image extracted to '/tmp/extracted_cover.jpg' ...")
+
+
 
 if __name__ == '__main__':
     main()

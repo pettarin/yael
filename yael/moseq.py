@@ -2,11 +2,11 @@
 # coding=utf-8
 
 """
-A Media Overlay <seq> element.
+A Media Overlay `<seq>` element.
 
 Besides its own attributes,
-it holds a list of <seq> (:class:`yael.moseq.MOSeq`)
-and <par> (:class:`yael.mopar.MOPar`)
+it holds a list of `<seq>` (:class:`yael.moseq.MOSeq`)
+and `<par>` (:class:`yael.mopar.MOPar`)
 children elements.
 """
 
@@ -18,13 +18,13 @@ from yael.namespace import Namespace
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class MOSeq(Element):
     """
-    Build a Media Overlay <seq> element or
+    Build a Media Overlay `<seq>` element or
     parse it from `obj` or `string`.
     """
 
@@ -73,9 +73,9 @@ class MOSeq(Element):
 
     def add_child(self, child):
         """
-        Add the given child to this <seq>.
+        Add the given child to this `<seq>`.
 
-        :param child: the <seq> or <par> child to be added
+        :param child: the `<seq>` or `<par>` child to be added
         :type  child: :class:`yael.moseq.MOSeq` or :class:`yael.mopar.MOPar`
 
         """

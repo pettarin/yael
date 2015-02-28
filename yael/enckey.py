@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-A <enc:EncryptedKey> element.
+A `<enc:EncryptedKey>` element.
 
 Note: this class might be incomplete and/or need refactoring.
 """
@@ -14,13 +14,13 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class EncKey(Element):
     """
-    Build a <enc:EncryptedKey> element or
+    Build a `<enc:EncryptedKey>` element or
     parse it from `obj` or `string`.
     """
 
@@ -58,7 +58,7 @@ class EncKey(Element):
         try:
             self.v_id = obj.get(EncKey.A_ID)
 
-            # locate <enc:EncryptionMethod> element
+            # locate `<enc:EncryptionMethod>` element
             encryption_method_arr = yael.util.query_xpath(
                 obj=obj,
                 query="{0}:{1}",
@@ -69,7 +69,7 @@ class EncKey(Element):
                 self.v_encryption_method_algorithm = (
                     encryption_method_arr[0].get(EncKey.A_ALGORITHM))
 
-            # locate <ds:KeyInfo><ds:KeyName> element
+            # locate `<ds:KeyInfo><ds:KeyName>` element
             key_name_arr = yael.util.query_xpath(
                 obj=obj,
                 query="{0}:{1}/{0}:{2}",
@@ -79,7 +79,7 @@ class EncKey(Element):
             if len(key_name_arr) > 0:
                 self.v_key_name = key_name_arr[0].text
 
-            # locate <enc:CipherData><enc:CipherValue> element
+            # locate `<enc:CipherData><enc:CipherValue>` element
             cipher_value_arr = yael.util.query_xpath(
                 obj=obj,
                 query="{0}:{1}/{0}:{2}",
@@ -93,9 +93,24 @@ class EncKey(Element):
             raise Exception("Error while parsing the given object")
 
     @property
+    def v_id(self):
+        """
+        The value of the `Id` attribute of `<enc:EncryptedKey>`.
+
+        :rtype: str
+        """
+        return self.__v_id
+
+    @v_id.setter
+    def v_id(self, v_id):
+        self.__v_id = v_id
+
+    @property
     def v_cipher_value(self):
         """
-        The value of the <enc:CipherValue>
+        The value of the `<enc:CipherValue>`.
+
+        :rtype: str
         """
         return self.__v_cipher_value
 
@@ -106,7 +121,9 @@ class EncKey(Element):
     @property
     def v_encryption_method_algorithm(self):
         """
-        The value of the `Algorithm` attribute of <enc:EncryptionMethod>.
+        The value of the `Algorithm` attribute of `<enc:EncryptionMethod>`.
+
+        :rtype: str
         """
         return self.__v_encryption_method_algorithm
 
@@ -117,7 +134,9 @@ class EncKey(Element):
     @property
     def v_key_name(self):
         """
-        The value of the <ds:KeyName>.
+        The value of the `<ds:KeyName>`.
+
+        :rtype: str
         """
         return self.__v_key_name
 

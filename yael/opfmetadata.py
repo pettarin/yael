@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-The OPF <metadata> element.
+The OPF `<metadata>` element.
 """
 
 from yael.dc import DC
@@ -18,13 +18,13 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class OPFMetadata(Element):
     """
-    Build the OPF <metadata> element or
+    Build the OPF `<metadata>` element or
     parse it from `obj` or `string`.
     """
 
@@ -58,7 +58,7 @@ class OPFMetadata(Element):
         self.v_dir = obj.get(OPFMetadata.A_DIR)
         self.v_xml_lang = obj.get(OPFMetadata.A_NS_LANG)
 
-        # locate <dc:*> elements
+        # locate `<dc:...>` elements
         for element in DC.ALL_ELEMENTS:
             dc_arr = yael.util.query_xpath(
                 obj=obj,
@@ -75,7 +75,7 @@ class OPFMetadata(Element):
                 if dc_elem_parsed != None:
                     self.add_metadatum(dc_elem_parsed)
 
-        # locate <meta> elements
+        # locate `<meta>` elements
         meta_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}",
@@ -95,7 +95,7 @@ class OPFMetadata(Element):
             if meta_parsed != None:
                 self.add_metadatum(meta_parsed)
 
-        # locate <link> elements
+        # locate `<link>` elements
         link_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}",
@@ -131,19 +131,19 @@ class OPFMetadata(Element):
         :param v_id: the desired `id`
         :type  v_id: str
         :returns:    the child with given id, or None if not found
-        :rtype:      OPFMetadatum
+        :rtype:      :class:`yael.opfmetadatum.OPFMetadatum`
         """
         lis = list(e for e in self.metadata if e.v_id == v_id)
         return yael.util.safe_first(lis)
 
     def metadata_by_tag(self, v_tag):
         """
-        Return the metadata with <tag>.
+        Return the metadata with `<tag>`.
 
         :param v_tag: the desired `tag`
         :type  v_tag: str
         :returns:     the list of OPFMetadatum items with given tag
-        :rtype:       list
+        :rtype:       list of :class:`yael.opfmetadatum.OPFMetadatum`
         """
         return list(e for e in self.metadata if e.v_tag == v_tag)
 
@@ -154,7 +154,7 @@ class OPFMetadata(Element):
         :param v_property: the desired `prop` property
         :type  v_property: str
         :returns:          the list of OPFMetadatum items with given property
-        :rtype:            list
+        :rtype:            list of :class:`yael.opfmetadatum.OPFMetadatum`
         """
         return list(e for e in self.metadata if (
             isinstance(e, OPFMeta3) and (e.v_property == v_property)))
@@ -164,16 +164,16 @@ class OPFMetadata(Element):
         Add the given metadatum to the metadata.
 
         :param metadatum: the metadatum to be added
-        :type  metadatum: OPFMetadatum
+        :type  metadatum: :class:`yael.opfmetadatum.OPFMetadatum`
         """
         self.metadata.append(metadatum)
 
     def add_link(self, link):
         """
-        Add the given <link> to the metadata.
+        Add the given `<link>` to the metadata.
 
-        :param link: the <link> to be added
-        :type  link: OPFLink
+        :param link: the `<link>` to be added
+        :type  link: :class:`yael.opflink.OPFLink`
         """
         self.links.append(link)
 
@@ -248,7 +248,7 @@ class OPFMetadata(Element):
         """
         The list of metadatum objects.
 
-        :rtype: list of `yael.opfmetadatum.OPFMetadatum` objects
+        :rtype: list of :class:`yael.opfmetadatum.OPFMetadatum` objects
         """
         return self.__metadata
 
@@ -259,9 +259,9 @@ class OPFMetadata(Element):
     @property
     def links(self):
         """
-        The list of <link> objects.
+        The list of `<link>` objects.
 
-        :rtype: list of `yael.opflink.OPFLink` objects
+        :rtype: list of :class:`yael.opflink.OPFLink` objects
         """
         return self.__links
 

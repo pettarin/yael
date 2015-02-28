@@ -17,7 +17,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -71,7 +71,7 @@ class MODocument(Element):
         self.v_epub_prefix = smil.get(MODocument.A_NS_PREFIX)
         self.v_version = smil.get(MODocument.A_VERSION)
 
-        # locate <head> element
+        # locate `<head>` element
         #head_arr = yael.util.query_xpath(
         #            obj=smil,
         #            query="{0}:{1}",
@@ -81,7 +81,7 @@ class MODocument(Element):
         #if (len(head_arr) > 0):
         #    self.head = ...
 
-        # locate <body> element
+        # locate `<body>` element
         body_arr = yael.util.query_xpath(
             obj=smil,
             query="{0}:{1}",
@@ -93,7 +93,7 @@ class MODocument(Element):
     @property
     def v_epub_prefix(self):
         """
-        The `epub:prefix` attribute of the <smil> element.
+        The `epub:prefix` attribute of the `<smil>` element.
 
         :rtype: str
         """
@@ -106,7 +106,7 @@ class MODocument(Element):
     @property
     def v_id(self):
         """
-        The `id` attribute of the <smil> element.
+        The `id` attribute of the `<smil>` element.
 
         :rtype: str
         """
@@ -119,7 +119,7 @@ class MODocument(Element):
     @property
     def v_version(self):
         """
-        The `version` attribute of the <smil> element.
+        The `version` attribute of the `<smil>` element.
 
         :rtype: str
         """
@@ -132,9 +132,9 @@ class MODocument(Element):
     @property
     def body(self):
         """
-        The `body` child of the <smil> element.
+        The `body` child of the `<smil>` element.
 
-        :rtype: yael.moseq.MOSeq
+        :rtype: :class:`yael.moseq.MOSeq`
         """
         return self.__body
 
@@ -145,7 +145,7 @@ class MODocument(Element):
     @property
     def head(self):
         """
-        The `head` child of the <smil> element.
+        The `head` child of the `<smil>` element.
 
         Currently not parsed, as per specs, it is empty.
 
@@ -162,10 +162,10 @@ class MODocument(Element):
         """
         True if this Media Overlay Document
         references Embedded Audio and Video
-        (i.e., if it contains a <par>
-        with a <text> child but no <audio> child).
+        (i.e., if it contains a `<par>`
+        with a `<text>` child but no `<audio>` child).
 
-        :rtype: boolean
+        :rtype: bool
         """
 
         try:
@@ -178,7 +178,7 @@ class MODocument(Element):
     def referenced_audio_files(self):
         """
         The list of audio files referenced
-        by <audio> elements in this Media Overlay Document.
+        by `<audio>` elements in this Media Overlay Document.
 
         :rtype: list of str
         """
@@ -193,7 +193,7 @@ class MODocument(Element):
     def referenced_fragment_identifiers(self):
         """
         The list of fragment identifiers referenced
-        by <text> elements in this Media Overlay Document.
+        by `<text>` elements in this Media Overlay Document.
 
         :rtype: list of str
         """
@@ -208,7 +208,7 @@ class MODocument(Element):
     def grouped_referenced_fragment_identifiers(self):
         """
         A dictionary containing the fragment identifiers referenced
-        by <text> elements in this Media Overlay Document.
+        by `<text>` elements in this Media Overlay Document.
         Each key is the path to the Content Document,
         and the corresponding value is a list of fragment indentifiers
         in that Content Document.

@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-An OPF <dc:...> metadatum.
+An OPF `<dc:...>` metadatum.
 
 This class can be used for both EPUB 2 and EPUB 3
 DC metadata.
@@ -16,13 +16,13 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
 class OPFDC(OPFMetadatum):
     """
-    Build an OPF <dc:...> metadatum or
+    Build an OPF `<dc:...>` metadatum or
     parse it from `obj` or `string`.
     """
 

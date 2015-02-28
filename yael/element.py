@@ -23,7 +23,7 @@ from yael.jsonable import JSONAble
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -70,8 +70,8 @@ class Element(JSONAble):
         """
         Build element by parsing the given XML node.
 
-        :param obj: an XML node to be parsed
-        :type  obj: `lxml` node object
+        :param obj: the XML (`lxml`) node object to be parsed
+        :type  obj: object
 
         """
 
@@ -97,7 +97,9 @@ class Element(JSONAble):
     @property
     def asset(self):
         """
-        The :class:`yael.asset.Asset` associated with this element.
+        The asset associated with this element.
+
+        :rtype: :class:`yael.asset.Asset`
         """
         return self.__asset
 

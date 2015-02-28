@@ -13,7 +13,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -81,7 +81,7 @@ class NCXTocNode(Element):
         if len(content_arr) > 0:
             self.v_src = content_arr[0].get(NCXTocNode.A_SRC)
 
-        # locate children <navPoint> elements (if any)
+        # locate children `<navPoint>` elements (if any)
         nav_points_arr = yael.util.query_xpath(
             obj=obj,
             query="{0}:{1}",
@@ -102,7 +102,7 @@ class NCXTocNode(Element):
         Add the given child to this node.
 
         :param child: the node child to be added
-        :type  child: NCXTocNode
+        :type  child: :class:`yael.ncxtocnode.NCXTocNode`
 
         """
         self.children.append(child)
