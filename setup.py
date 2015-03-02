@@ -7,7 +7,7 @@ from distutils.core import setup
 setup(
     name='yael',
     packages=['yael'],
-    version='0.0.4',
+    version='0.0.5',
     description='yael (Yet Another EPUB Library) is a Python library for reading, manipulating, and writing EPUB 2/3 files.',
     author='Alberto Pettarin',
     author_email='alberto@albertopettarin.it',

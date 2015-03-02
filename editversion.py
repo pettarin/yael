@@ -19,6 +19,11 @@ def main():
     files = [
         {
             "directory": False,
+            "path":      "setup.py",
+            "pattern":   r"    version='([0-9]+\.[0-9]+\.[0-9]+)',"
+        },
+        {
+            "directory": False,
             "path":      "docs/source/conf.py",
             "pattern":   r"release = '([0-9]+\.[0-9]+\.[0-9]+)'"
         },
