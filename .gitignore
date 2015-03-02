@@ -1,8 +1,9 @@
-*.sh
 *.py[cdo]
-yael/__pycache__
-docs/build
+*.sh
+*.swp
+MANIFEST
 bak
 dist
+docs/build
 tmp
-MANIFEST
+yael/__pycache__

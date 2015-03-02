@@ -21,17 +21,14 @@ import sys
 PROJECT_DIRECTORY = os.path.dirname(
     os.path.dirname(os.path.realpath(sys.argv[0])))
 sys.path.append(PROJECT_DIRECTORY)
-from yael import DC
-from yael import MediaType
-from yael import OPFMeta3
-from yael import Parsing 
-from yael import Publication 
+from yael import Parsing
+from yael import Publication
 import yael.util
 
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.6"
+__version__ = "0.0.7"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -43,35 +40,52 @@ def usage():
 
 def main():
     if len(sys.argv) > 1:
-        p = Publication(
+        # read from file.epub or uncompressed dir
+        # parsing MO is not necessary
+        ebook = Publication(
             path=sys.argv[1],
             parsing_options=[Parsing.NO_MEDIA_OVERLAY])
     else:
+        # no arguments => print usage
         usage()
         return
 
+    # shall we add the arcs showing the spine progression?
     add_spine = True
     if (len(sys.argv) > 2) and (sys.argv[2] == "--no-spine"):
         add_spine = False
 
+    # arc accumulator
     arcs = []
-    pac_document = p.container.default_rendition.pac_document
+
+    # shortcuts
+    pac_document = ebook.container.default_rendition.pac_document
     manifest = pac_document.manifest
     spine = pac_document.spine.itemrefs
+
+    # for each item in the spine...
     for itemref in spine:
         item = manifest.item_by_id(itemref.v_idref)
         if item != None:
             i_p_item = item.asset.internal_path
             try:
+                # ...read the item contents and try to load it
+                # as a tag soup using BeautifulSoup...
                 soup = bs4.BeautifulSoup(item.contents)
+
+                # ... finding all the <a> elements...
                 for link in soup.find_all('a'):
+                    # ... that have an href attribute
                     target_href = link.get('href')
                     if (
                             (target_href != None) and
                             (not target_href.startswith("http"))):
+                        # get the internal path of the target file,
+                        # removing the #fragment, if any
                         i_p_target = yael.util.norm_join_parent(
                             i_p_item,
                             target_href.split("#")[0])
+                        # get the manifest id of the target file
                         target = manifest.item_by_internal_path(i_p_target)
                         if target != None:
                             arcs.append([item.v_id, target.v_id, "link"])
@@ -85,6 +99,23 @@ def main():
                 target = pac_document.manifest.item_by_id(spine[i+1].v_idref)
                 arcs.append([item.v_id, target.v_id, "spine"])
 
+    # output to stdout in Graphviz (dot) format
+    # use redirection to save to file, i.e.:
+    #
+    # digraph book {
+    # "a" -> "b";
+    # "b" -> "a";
+    # "b" -> "c";
+    # "c" -> "b";
+    # "a" -> "b" [color=red];
+    # }
+    #
+    # TODO one might want to output a similar graph
+    #      showing referenced assets (images, audio, etc.),
+    #      not just <a> links
+    # TODO mark linear="no" nodes with a special symbol
+    # TODO remove/compact/weight duplicate arcs
+    #
     print("digraph book {")
     for arc in arcs:
         if arc[2] == "link":
