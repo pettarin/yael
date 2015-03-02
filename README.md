@@ -2,25 +2,70 @@
 
 **yael** (Yet Another EPUB Library) is a Python library for reading, manipulating, and writing EPUB 2/3 files.
 
-* Version: 0.0.5
-* Date: 2015-02-28
+* Version: 0.0.6
+* Date: 2015-03-02
 * Developer: [Alberto Pettarin](http://www.albertopettarin.it/) ([contact](http://www.albertopettarin.it/contact.html))
 * License: the MIT License (MIT)
 
 
-## Usage
+## News
 
 This library is currently in **development**.
-
 The reading part is essentially complete, while the editing/writing is missing.
 
 Please do **NOT** use this code in production until it reaches v1.0.0.
 
-Feedback (especially on the API/interface) is welcome at any version number!
+Feedback (especially on the lib interface) is welcome at any version number!
+(Please use the [GitHub issue tracker](https://github.com/pettarin/yael/issues).)
 
-See [`test/publication_test.py`](test/publication_test.py),
+
+## Usage
+
+```python
+from yael import SimpleEPUB
+
+ebook = SimpleEPUB(path="/tmp/bierce01.epub")
+
+ebook.manifestation # 'compressed'
+ebook.size # 7281362
+ebook.version # '3.0'
+ebook.unique_identifier # 'urn:uuid:2722b0eb-a4f9-4b05-97f9-9123381e58b3'
+ebook.release_identifier # 'urn:uuid:2722b0eb-a4f9-4b05-97f9-9123381e58b3@2014-06-06T00:00:01Z'
+ebook.title # 'A Horseman In The Sky'
+ebook.language # 'en'
+ebook.author # 'Ambrose Bierce'
+ebook.date # '2014-06-06'
+ebook.description # 'This Audio-eBook was crafted by ReadBeyond ...'
+ebook.publisher # 'ReadBeyond'
+ebook.internal_path_cover_image # 'OEBPS/Images/cover.png'
+
+# print a JSON string representation
+print(ebook)
+
+# print the TOC with resolved paths
+print(ebook.resolved_toc)
+
+# print the spine
+print("Spine")
+for i_p_spine_item in ebook.resolved_spine:
+    print(i_p_spine_item)
+    print("")
+
+# extract cover image to /tmp/extracted_cover.jpg
+cover_image = ebook.cover_image
+if cover_image != None:
+    output_file = open("/tmp/extracted_cover.jpg", "wb")
+    output_file.write(cover_image)
+    output_file.close()
+    print("Cover image extracted to '/tmp/extracted_cover.jpg' ...")
+
+```
+
+See
+[`test/publication_test.py`](test/publication_test.py),
 [`test/simpleepub_test.py`](test/simpleepub_test.py), and
-[`test/epub_to_gv.py`](test/epub_to_gv.py) for usage examples.
+[`test/epub_to_gv.py`](test/epub_to_gv.py)
+for more complex, commented examples.
 
 
 ## Documentation
@@ -29,10 +74,9 @@ Online: [http://www.albertopettarin.it/yael/](http://www.albertopettarin.it/yael
 
 Generated from the source (requires sphinx):
 
-```
+```bash
 $ git clone https://github.com/pettarin/yael.git
 $ cd yael/docs
-$ make clean
 $ make html
 ```
 

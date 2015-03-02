@@ -19,7 +19,7 @@ from yael import SimpleEPUB
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.5"
+__version__ = "0.0.6"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -63,6 +63,10 @@ def main():
     print("Type                = %s" % p.type)
     print("")
 
+    # print the JSON string of this publication
+    # pretty, 4-chars indented, keys not sorted, entries with empty/null values not removed
+    print(p)
+    
     # print the TOC
     #print(p.toc)
 
