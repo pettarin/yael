@@ -2,4 +2,7 @@
 *.py[cdo]
 yael/__pycache__
 docs/build
+bak
 dist
+tmp
+MANIFEST

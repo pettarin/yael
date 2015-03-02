@@ -36,7 +36,7 @@ import yael.util
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
@@ -535,6 +535,5 @@ class Publication(JSONAble):
 
         # TODO perhaps some sort of memory footprint size might be useful
         return -1
-
 
 
