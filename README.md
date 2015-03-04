@@ -2,8 +2,8 @@
 
 **yael** (Yet Another EPUB Library) is a Python library for reading, manipulating, and writing EPUB 2/3 files.
 
-* Version: 0.0.7
-* Date: 2015-03-02
+* Version: 0.0.8
+* Date: 2015-03-04
 * Developer: [Alberto Pettarin](http://www.albertopettarin.it/) ([contact](http://www.albertopettarin.it/contact.html))
 * License: the MIT License (MIT)
 
@@ -58,9 +58,9 @@ if cover_image != None:
 ```
 
 See
-[`test/publication_test.py`](test/publication_test.py),
-[`test/simpleepub_test.py`](test/simpleepub_test.py), and
-[`test/epub_to_gv.py`](test/epub_to_gv.py)
+[`yael/examples/publication_examples.py`](yael/examples/publication_example.py),
+[`yael/examples/simpleepub_examples.py`](yael/examples/simpleepub_example.py), and
+[`yael/examples/epub_to_gv.py`](yael/examples/epub_to_gv.py)
 for more complex, commented examples.
 
 

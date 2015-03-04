@@ -39,7 +39,7 @@ def main():
         },
         {
             "directory": True,
-            "path":      "test/",
+            "path":      "yael/examples/",
             "pattern":   r"__version__ = \"([0-9]+\.[0-9]+\.[0-9]+)\""
         },
     ]
