@@ -11,7 +11,7 @@ import sys
 # yael modules
 # TODO find a better way to do this
 PROJECT_DIRECTORY = os.path.dirname(
-    os.path.dirname(os.path.realpath(sys.argv[0])))
+    os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0]))))
 sys.path.append(PROJECT_DIRECTORY)
 from yael import DC
 from yael import MediaType
@@ -22,7 +22,7 @@ from yael import Publication
 __author__ = "Alberto Pettarin"
 __copyright__ = "Copyright 2015, Alberto Pettarin (www.albertopettarin.it)"
 __license__ = "MIT"
-__version__ = "0.0.8"
+__version__ = "0.0.9"
 __email__ = "alberto@albertopettarin.it"
 __status__ = "Development"
 
