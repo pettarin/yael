@@ -2,7 +2,7 @@
 
 import os
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='yael',
@@ -15,7 +15,7 @@ setup(
     license='MIT',
     long_description=open('README.txt').read(),
     keywords=['epub', 'yael', 'EPUB 2', 'EPUB 3'],
-    install_requires='lxml >= 3.4.0, simplejson >= 3.6.0',
+    install_requires=['lxml >= 3.4.0', 'simplejson >= 3.6.0'],
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Environment :: Console",
